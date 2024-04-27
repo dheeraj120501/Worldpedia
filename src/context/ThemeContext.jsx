@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-const ThemeContext = createContext('light');
+const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
   const preferenceTheme = localStorage.getItem('theme');
