@@ -1,5 +1,15 @@
+import React, { useContext } from 'react';
+import Home from './screens/Home/Home';
+import { ThemeContext } from './context/ThemeContext';
+
 function App() {
-  return <h1 className="text-3xl font-bold underline bg-dark-blue">Hello world!</h1>;
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <div className={theme}>
+      <Home />
+    </div>
+  );
 }
 
 export default App;
