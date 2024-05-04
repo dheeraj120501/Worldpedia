@@ -6,9 +6,14 @@ import { IoSearch } from 'react-icons/io5';
 
 function Home() {
   const [searchValue, setSearchValue] = useState('');
+  const [regionValue, setRegionValue] = useState('');
 
   const changeSearchInput = (value) => {
     setSearchValue(value);
+  };
+
+  const changeRegionValue = (value) => {
+    setRegionValue(value);
   };
 
   return (
@@ -21,9 +26,14 @@ function Home() {
           placeholder={'Search for a country...'}
           iconComponent={<IoSearch className="text-light-text dark:text-dark-text mr-2" />}
         />
-        <DropDown options={['Africa', 'America', 'Asia', 'Europe', 'Oceania']} title="Filter by Region" />
+        <DropDown
+          value={regionValue}
+          changeHandler={changeRegionValue}
+          options={['Africa', 'America', 'Asia', 'Europe', 'Oceania']}
+          title="Filter by Region"
+          isDefault
+        />
       </div>
-      {searchValue}
     </div>
   );
 }
