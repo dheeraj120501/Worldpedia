@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../../component/Navbar';
 import SearchInput from './component/SearchInput';
+import DropDown from './component/DropDown';
 
 function Home() {
   return (
@@ -8,6 +9,7 @@ function Home() {
       <Navbar />
       <div className="px-20 pt-10 flex justify-between items-start">
         <SearchInput />
+        <DropDown options={['Africa', 'America', 'Asia', 'Europe', 'Oceania']} title="Filter by Region" />
       </div>
     </div>
   );
