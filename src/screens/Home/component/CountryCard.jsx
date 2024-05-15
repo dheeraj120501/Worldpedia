@@ -4,7 +4,7 @@ function CountryCard({ country }) {
   const { name, flag, population, region, capital } = country;
 
   return (
-    <div className="w-[250px] bg-light-element dark:bg-dark-element dark:text-light-element text-dark-element rounded-md overflow-hidden">
+    <div className="w-[250px] bg-light-element dark:bg-dark-element rounded-md overflow-hidden">
       <div className="h-[150px] w-[250px]">
         <img src={flag} alt={`${name}-flag`} className="h-full w-full" />
       </div>

@@ -4,6 +4,9 @@ import InputText from './component/InputText';
 import DropDown from './component/DropDown';
 import { IoSearch } from 'react-icons/io5';
 import CountryCard from './component/CountryCard';
+import Loader from '../../component/Loader';
+import useFetch from '../../hooks/useFetch';
+import API_ENDPOINTS from '../../api/endpoints';
 
 function Home() {
   const [searchValue, setSearchValue] = useState('');
@@ -17,25 +20,10 @@ function Home() {
     setRegionValue(value);
   };
 
-  const [countryData, setCountryData] = useState([]);
-
-  useEffect(() => {
-    fetch('https://restcountries.com/v3.1/all')
-      .then((res) => res.json())
-      .then((countries) => {
-        const countryData = countries.map((country) => ({
-          name: country.name.official,
-          flag: country.flags.png,
-          population: country.population,
-          region: country.region,
-          capital: country.capital ? country.capital[0] : 'N/A',
-        }));
-        setCountryData(countryData);
-      });
-  }, []);
+  const [isLoading, isError, countryData] = useFetch(API_ENDPOINTS.countries.getAllCountries);
 
   return (
-    <div className="w-screen min-h-screen bg-light-bg dark:bg-dark-bg">
+    <div className="w-screen min-h-screen bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text">
       <Navbar className="px-20" />
       <div className="px-20 pt-10">
         <div className="flex justify-between items-start">
@@ -53,11 +41,27 @@ function Home() {
             isDefault
           />
         </div>
-        <div className="py-10 flex flex-wrap gap-20 justify-between">
-          {countryData.map((country) => (
-            <CountryCard country={country} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="center">
+            <Loader />
+          </div>
+        ) : isError ? (
+          <div className="center">Sorry! Some error occured!</div>
+        ) : (
+          <div className="py-10 flex flex-wrap gap-20 justify-between">
+            {countryData.map((country) => (
+              <CountryCard
+                country={{
+                  name: country.name.official,
+                  flag: country.flags.png,
+                  population: country.population,
+                  region: country.region,
+                  capital: country.capital ? country.capital[0] : 'N/A',
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
