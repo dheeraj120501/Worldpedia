@@ -51,6 +51,7 @@ function Home() {
           <div className="py-10 flex flex-wrap gap-20 justify-between">
             {countryData.map((country) => (
               <CountryCard
+                key={country.name.official}
                 country={{
                   name: country.name.official,
                   flag: country.flags.png,

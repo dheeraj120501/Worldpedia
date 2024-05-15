@@ -31,7 +31,7 @@ function DropDown({ options, title, value, changeHandler, isDefault = false }) {
           </div>
         )}
         {options.map((option) => (
-          <div className="mb-2" onClick={changeValue}>
+          <div className="mb-2" onClick={changeValue} key={option}>
             {option}
           </div>
         ))}
